@@ -54,7 +54,7 @@
 const globalErrHandler = require('./middlewares/error_handler_api');
 const AppError = require('./utils/app_error.js');
 const express = require('express');
-// const limiter = require('./middlewares/rate_limit');
+const limiter = require('./middlewares/api_limiter');
 const compression = require('compression');
 const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
@@ -107,9 +107,9 @@ app.use(hpp());
 // Compress all responses
 app.use(compression());
 
+//Limiting request form same IP
 if (CURRENT_ENV.toLocaleLowerCase() === 'production') {
-  //Limiting request form same IP
-  app.use('/api');
+  app.use('/api',limiter);
 }
 
 // routes
