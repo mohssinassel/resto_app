@@ -1,50 +1,63 @@
-const express = require("express");
-const cors = require("cors");
-const db_mongoose = require("mongoose");
-// const Routes_  = require("./routes/myRoutes.js");
-// const msg_router = require("./routes/msgRoutes.js");
-// const socket = require("socket.io");
+const mongoose = require('mongoose');
+require('./utils/logger');
+const { DB, PORT } = require('./config/app_config');
 
-
-const app = express();
-require("dotenv").config();
-
-app.use(cors());
-app.use(express.json())
-// app.use("/api/auth",Routes_);
-// app.use("/api/messages", msg_router);
-
-
-db_mongoose.connect(process.env.dbURI, {useNewUrlParser: true,useUnifiedTopology: true,}).then(() => {
-    console.log("my database Successfully");
-  })
-  .catch((err) => {
-    console.log(err.message);
-  });
-
-
-const server = app.listen(process.env.PORT, () =>
-  console.log(`Server run on PORT => ${process.env.PORT}`)
-);
-
-const io = socket(server, {
-  cors: {
-    origin: "http://localhost:3000",
-    credentials: true,
-  },
+process.on('uncaughtException', (err) => {
+  Logger.error('UNCAUGHT EXCEPTION!!!  shutting down ...');
+  Logger.error(`${err.name}, ${err.message}, ${err.stack}`);
+  process.exit(1);
 });
 
-// global.onlineUsers = new Map();
-// io.on("connection", (socket) => {
-//   global.chatSocket = socket;
-//   socket.on("add-user", (userId) => {
-//     onlineUsers.set(userId, socket.id);
-//   });
+const app = require('./app');
 
-//   socket.on("send-msg", (data) => {
-//     const sendUserSocket = onlineUsers.get(data.to);
-//     if (sendUserSocket) {
-//       socket.to(sendUserSocket).emit("msg-recieve", data.msg);
-//     }
-//   });
-// });
+mongoose.set('strictQuery', true);
+
+// Connect the database
+mongoose
+  .connect(DB, { useNewUrlParser: true })
+  .then((con) => {
+    Logger.info('DB Connected Successfully! 😊');
+  })
+  .catch((err) => {
+    Logger.error('DB Connection Failed! \n\tException : ' + err);
+  }); //Now all the errors of mongo will be handled by the catch block
+
+// When the connection is disconnected
+mongoose.connection.on('disconnected', () => {
+  Logger.error('DB Connection Disconnected! 😢');
+});
+
+// Start the server
+const expServer = app.listen(PORT, async () => {
+  Logger.info(`App running on port ${PORT} 👌`);
+});
+
+// create the admin user if not exists
+// require('./utils/create_default_user')();
+
+process.on('unhandledRejection', (err) => {
+  Logger.error('UNHANDLED REJECTION!!!  shutting down ...');
+  Logger.error(`${err.name}, ${err.message}, ${err.stack}`);
+  expServer.close(() => {
+    process.exit(1);
+  });
+});
+
+// add graceful shutdown.
+process.on('SIGTERM', () => {
+  Logger.info('SIGTERM RECEIVED. Shutting down gracefully');
+  expServer.close(() => {
+    mongoose.connection.close(false, () => {
+      Logger.info('💥 Process terminated!');
+    });
+  });
+});
+
+process.on('SIGINT', () => {
+  Logger.info('SIGINT RECEIVED. Shutting down gracefully');
+  expServer.close(() => {
+    mongoose.connection.close(false, () => {
+      Logger.info('💥 Process terminated!');
+    });
+  });
+});

@@ -14,4 +14,9 @@ router.get("/allusers/:id", getAllUsers);
 router.post("/setavatar/:id", setAvatar);
 router.get("/logout/:id", logOut);
 
-module.exports = router;
+// make this file so i can use it with authRoutes(router) in index.js
+const authRoutes = (mainrouter) => {
+  mainrouter.use('/auth', router);
+};
+
+module.exports = authRoutes;

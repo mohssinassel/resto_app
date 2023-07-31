@@ -1,22 +1,19 @@
-// function navbar() {
+import './Navbar.css'
 
-
-// return (
-//     <>
-//         <div>
-//             ho
-//         </div>
-//     </>
-// )
-// }
-
-// export default navbar
-// import React from 'react'
 
 const Navbar = () => {
   return (
-    <div>
-      ho
+    <div className='navBar'>
+      <div className='logo'>FOOD</div>
+        <div className='navLink'>
+          <div>Home</div>
+          <div>Menu</div>
+          <div>About us</div>
+        </div>
+      
+      <div>
+        <button className='signIn'>Sign In</button>
+      </div>
     </div>
   )
 }
