@@ -1,1 +1,17 @@
+:root{
+    --main-color : rgb(205, 25, 64);
+    --text-color : rgb(155, 157, 179);
+    --title-color : rgb(43, 45, 66);
+    --second-color : rgb(249, 143, 51);
 
+    --main-font :'Source Code Pro', monospace;
+    --second-font: 'Urbanist', sans-serif;
+    
+}
+
+
+#root{
+    max-width: 1400px;
+    margin: auto;
+    
+}
