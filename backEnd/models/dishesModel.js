@@ -1,20 +1,25 @@
 const mongoose = require("mongoose");
 
 const dishesSchema = new mongoose.Schema({
-  dishename: {
+  name: {
     type: String,
     required: true,
     unique: true,
   },
-  picture_of_plat: {
+  image_url: {
     type: String,
     required: true,
     default : ""
   },
+  category: {
+    type: String,
+    required: true,
+  },
   price: {
     type: Float64Array,
     required: true
-  }
+  },
+
 });
 
 module.exports = mongoose.model("Dishes", dishesSchema);

@@ -1,15 +1,31 @@
 import ImageSlider from "../components/ImageSlider";
 import { BiSearch } from 'react-icons/bi';
+import { useState , useEffect } from "react";
 import '../styles/Home.css';
 import Menu from "./Menu"; 
 import AboutUs from "./AboutUs";
 import Cart from "../components/Cart";
+import axios from 'axios';
 const Home = () => {
     const slides = [
         {url:'/images/panini.jpg',title: 'burger'},
         {url:'/images/coffee.jpg',title: 'burger'},
         {url:'/images/frise.jpg',title: 'burger'}
     ]
+    const [data, setData] = useState([]);
+
+    const fetchData = async () => {
+    try {
+        const response = await axios.get('/dish/getAll'); // Replace with your API endpoint
+        const data = response.data;
+        console.log(data);
+    } catch (error) {
+        console.error('Error fetching data:', error);
+    }
+    };
+    useEffect(() => {
+        fetchData()
+      }, []);
     
     
     return (
@@ -32,6 +48,12 @@ const Home = () => {
                     
             </div>
         </div>
+        </div>
+        <div>
+        {data.map((item) => (
+        <div key={item._id}>{item.name}</div>
+      ))}
+
         </div>
         <br/><br/><br/>
         <Menu/>

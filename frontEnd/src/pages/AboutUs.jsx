@@ -1,6 +1,7 @@
 import "../styles/AboutUs.css";
 import {BsFacebook ,BsInstagram ,BsTwitter} from "react-icons/bs";
 import { Container } from "reactstrap";
+import MenuAdmin from "../components/MenuAdmin";
 const AboutUs = () => {
     return (
         <>
@@ -19,6 +20,7 @@ const AboutUs = () => {
                 <img src="/images/burger.jpg" className="aboutImg"/>
             </div>
         </div>
+        <MenuAdmin/>
         </>
     )}
 
