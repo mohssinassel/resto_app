@@ -7,7 +7,7 @@ import Sign from './pages/Sign';
 import Cart from "./components/Cart";
 import Admin from './pages/Admin';
 import Footer from "./pages/Footer"
-import { Routes , Route , useLocation} from 'react-router-dom';  
+import { Routes , Route } from 'react-router-dom';  
 import { ShopContextProvider } from './components/shop-context';
 
 // import Header from './components/Header';
