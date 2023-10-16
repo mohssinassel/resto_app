@@ -1,13 +1,14 @@
 .containerSlider{
     width: 40%;
-    
+    margin-top: 50px;
+    margin-bottom: 50px;
     display:flex;
     justify-content: space-evenly;
     /* flex-direction: column; */
 }
 .containerStyles {
     width : 400px;
-    height: 500px
+    height: 500px;
 }
 .sliderStyles{
     height:100%;
@@ -48,6 +49,8 @@
 }
 .mainContainer{
     display: flex;
+    justify-content: center;
+    align-items: center;
     font-family: 'Rubik', sans-serif;
 }
 .searchSentence{
@@ -63,11 +66,11 @@
 }
 .containerSearch{
     /* background-color: antiquewhite; */
-    margin: 30px 0 0 0;
+    margin: 2vh 0 0 0;
     display: flex;
     /* border: 1px solid var(--title-color); */
     border-radius: 5px;
-    padding: 5px;
+    /* padding: 5px;/ */
     width: 90%;
     height: 10vh;
     justify-content: center;
@@ -118,29 +121,39 @@
         font-weight: 700;
     }
     
+    
 }
-@media only screen and (max-width: 450px) {
+
+
+@media (max-width: 768px){
+    .containerSlider{
+        display: none;
+    
+    }
+    .search{
+        margin-top: 50px;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+        
+    }
     .mainContainer{
-        /* background-color: salmon; */
-        display: block;
-        margin: 0px;
+        width: 100%;
+        padding: 0;
+
+    }
+    .searchSentence , .searchSentence2{
+        text-align: center;
     }
     .searchSentence{
         font-size: 1.6rem;
         font-weight: 700;
     }
-    .containerSlider{
-        width: 90%;
-        margin: 20px 0 0 0;
-    }
-    .search{
-        width: 100%;
-        margin: 20px 0 0 0;
+    .containerSearch button{
+        margin: 2px 20px;
+        padding: 5px 30px;
     }
     .containerSearch{
         width: 100%;
-    }
-    .searchIcon{
-        width: 40px;
     }
 }

@@ -10,7 +10,7 @@ const Sign = () => {
     };
 
     return (
-        <div className="mainContainer">
+        <div className="mainSignContainer">
             <div className='signContainer'>
                 {showSignIn ? (
                     <SignIn toggleComponent={toggleComponent} />

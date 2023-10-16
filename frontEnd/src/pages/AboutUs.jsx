@@ -16,11 +16,11 @@ const AboutUs = () => {
                 des collectivites d'entreprises ceremonies , 
                 Et fetes de toutes les categories
             </div>
-            <div className="child-about" >
+            <div className="child-about imgAboutBurger" >
                 <img src="/images/burger.jpg" className="aboutImg"/>
             </div>
         </div>
-        <MenuAdmin/>
+        
         </>
     )}
 
