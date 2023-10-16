@@ -5,27 +5,17 @@ const ordersSchema = new mongoose.Schema({
     type: Date,
     required: true,
   },
-  waiter :{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
-    required: true,
-  },
-  chef:{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
-    required: true,
-  },
-  cashier:{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
-    required: true,
-  },
+  
   table :{
     type: String,
     required: true,
   },
   dishes :{
     type: Array,
+    required: true,
+  },
+  totalAmount: {
+    type: Number,
     required: true,
   },
 

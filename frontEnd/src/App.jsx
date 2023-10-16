@@ -6,14 +6,12 @@ import AboutUs from './pages/AboutUs';
 import Sign from './pages/Sign';
 import Cart from "./components/Cart";
 import Admin from './pages/Admin';
-<<<<<<< HEAD
+import testh from './pages/testh';
+
 import Footer from "./pages/Footer";
 import Orders from './components/orders';
 import { Routes , Route , useLocation} from 'react-router-dom';  
-=======
-import Footer from "./pages/Footer"
-import { Routes , Route } from 'react-router-dom';  
->>>>>>> 2ff4a5d80170fd7218e08324a10b6ff4f2251dd3
+
 import { ShopContextProvider } from './components/shop-context';
 import Inventory from './components/Inventory';
 import Customers from './components/Customers';
@@ -37,6 +35,7 @@ function App() {
         <Route path='/menu' Component={Menu}></Route> 
         <Route path='/aboutus' Component={AboutUs}></Route> 
         <Route path='/Sign' Component={Sign} ></Route> 
+        <Route path='/testh' Component={testh} ></Route> 
         <Route path='/Cart' Component={Cart} ></Route> 
         <Route path='/admin' Component={Admin} >
           <Route path='' Component={Orders} />

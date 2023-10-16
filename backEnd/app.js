@@ -113,7 +113,7 @@ if (CURRENT_ENV.toLocaleLowerCase() === 'production') {
 }
 
 // routes
-app.use(`/api/${API_VERSION}`, require('./routes/auth'));
+app.use(`/api/${API_VERSION}`, require('./routes/index'));
 
 app.get('/', (req, res) => {
   res.status(200).json({

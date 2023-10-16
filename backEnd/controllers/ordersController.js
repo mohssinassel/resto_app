@@ -2,7 +2,7 @@ const Orders = require("../models/ordersModel");
 
 module.exports.getAllOrders = async (req, res, next) => {
     try {
-        const orders = await Orders.find({}).populate("waiter").populate("chef").populate("cashier");
+        const orders = await Orders.find({});
         if(orders === null) return res.json({msg: "No orders found"});
         return res.json(orders);
     } catch (err) {
@@ -26,11 +26,9 @@ module.exports.updateOrder = async (req, res, next) => {
             id,
             {
                 date_of_reservation: req.body.date_of_reservation,
-                waiter : req.body.waiter,
-                chef: req.body.chef,
-                cashier: req.body.cashier,
                 table : req.body.table,
                 dishes : req.body.dishes,
+                totalAmount: req.body.totalAmount
             },
             { new: true }
           );
@@ -47,17 +45,6 @@ module.exports.deleteOrder = async (req, res, next) => {
         return res.json({msg:"Order was deleted successfully"});
     } catch (err) {
         next(err)
-    }
-}
-
-module.exports.getOrdersByWaiter = async (req, res, next) => {
-    try {
-        const waiter = req.body.waiter;
-        const orders = await Orders.find({waiter:waiter});
-        if(orders === null) return res.json({msg: "No orders found"});
-        return res.json(orders);
-    } catch (err) {
-        next(err);
     }
 }
 
