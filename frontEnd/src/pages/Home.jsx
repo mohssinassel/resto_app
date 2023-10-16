@@ -44,7 +44,7 @@ const Home = () => {
             <div className="containerSearch">
                         
                         <button type="submit" className="orderbtn">Order Now </button>
-                        <button type="submit" className="seeFoodbtn">See All Foods</button>
+                        <button type="submit" className="seeFoodbtn">See Foods</button>
                     
             </div>
         </div>

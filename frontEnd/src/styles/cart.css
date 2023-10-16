@@ -61,3 +61,27 @@
   border:2px solid var(--main-color) ;
 
 }
+
+@media (max-width:768px) {
+  .cartItem {
+    width: 400px;
+    margin: 20px;
+    height: 180px;
+  }
+  .prod_img{
+    width: 120px;
+    height: 120px;
+  }
+  .cartItem .description {
+    width: 200px;
+    font-size: 20px;
+    /* background-color: blue; */
+  }
+  .countHandler input {
+    width: 40px;
+  }
+  .countHandler button {
+    width: 35px;
+  }
+
+}

@@ -12,7 +12,7 @@ import "../styles/admin.css"
 
 const MenuAdmin = () => {
     const location = useLocation();
-    const [selectedKeys, setSelectedKeys] = useState("/");
+    const [selectedKeys, setSelectedKeys] = useState(["/"]);
 
     useEffect(() => {
         const pathName = location.pathname;
@@ -34,24 +34,20 @@ const MenuAdmin = () => {
         }}
         selectedKeys={[selectedKeys]}
         items={[
-          {
-            label: "Dashbaord",
-            icon: <AppstoreOutlined />,
-            key: "/",
-          },
+          
           {
             label: "Inventory",
-            key: "/inventory",
+            key: "/admin/inventory",
             icon: <ShopOutlined />,
           },
           {
             label: "Orders",
-            key: "/orders",
+            key: "/admin",
             icon: <ShoppingCartOutlined />,
           },
           {
             label: "Customers",
-            key: "/customers",
+            key: "/admin/customers",
             icon: <UserOutlined />,
           },
         ]}
