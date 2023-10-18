@@ -12,7 +12,7 @@ import "../styles/admin.css"
 
 const MenuAdmin = () => {
     const location = useLocation();
-    const [selectedKeys, setSelectedKeys] = useState(["/"]);
+    const [selectedKeys, setSelectedKeys] = useState("/");
 
     useEffect(() => {
         const pathName = location.pathname;

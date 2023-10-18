@@ -1,16 +1,21 @@
-const Dishes = require("../models/ordersModel");
+const Dishes = require("../models/dishesModel");
 
-module.export.getAllDishes = async (req, res, next) => {
+module.exports.getAllDishes = async (req, res, next) => {
     try {
-        const dishes = await Dishes.find({}).populate("waiter").populate("chef").populate("cashier");
-        if(dishes === null) return res.json({msg: "No dishes found"});
-        return res.json(dishes);
+        const dishes = await Dishes.find({});
+
+        if (dishes === null) {
+            return res.json({ msg: "No dishes found" });
+        } else {
+            return res.json(dishes);
+        }
     } catch (err) {
+        console.log("Error in getAllDishes: ", err);
         next(err);
     }
-}
+};
 
-module.export.getDish = async (req, res, next) => {
+module.exports.getDish = async (req, res, next) => {
     try {
         const id = req.body.id;
         const dish_by_id = await Dishes.findById({_id : id});
@@ -36,9 +41,10 @@ module.exports.updateDish = async (req, res, next) => {
         const Dish_to_update = await User.findByIdAndUpdate(
             id,
             {
-                dishename: req.body.dishename,
-                picture_of_plat : req.body.picture_of_plat,
-                price: req.body.price,
+                name: req.body.name,
+                image_url : req.body.image_url,
+                category: req.body.category,
+                price: req.body.price
             },
             { new: true }
           );
@@ -58,7 +64,7 @@ module.exports.deleteDish = async (req, res, next) => {
     }
 }
 
-module.export.getDishByName = async (req, res, next) => {
+module.exports.getDishByName = async (req, res, next) => {
     try {
         const dishename = req.body.dishename;
         const dish_by_name = await Dishes.findById({dishename : dishename});
