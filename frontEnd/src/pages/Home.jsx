@@ -12,20 +12,6 @@ const Home = () => {
         {url:'/images/coffee.jpg',title: 'burger'},
         {url:'/images/frise.jpg',title: 'burger'}
     ]
-    const [data, setData] = useState([]);
-
-    const fetchData = async () => {
-    try {
-        const response = await axios.get('/dish/getAll'); // Replace with your API endpoint
-        const data = response.data;
-        console.log(data);
-    } catch (error) {
-        console.error('Error fetching data:', error);
-    }
-    };
-    useEffect(() => {
-        fetchData()
-      }, []);
     
     
     return (
@@ -49,12 +35,7 @@ const Home = () => {
             </div>
         </div>
         </div>
-        <div>
-        {data.map((item) => (
-        <div key={item._id}>{item.name}</div>
-      ))}
-
-        </div>
+       
         <br/><br/><br/>
         <Menu/>
         

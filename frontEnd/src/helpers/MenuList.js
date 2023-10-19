@@ -9,20 +9,15 @@ export const MenuList = () => {
     const fetchDishData = async () => {
       try {
         const response = await axios.get(dishGetAll);
-
-        if (response.data && response.data.msg) {
-          console.log(response.data.msg);
-        }
-
-        console.log(response.data);
         setMenu(response.data);
       } catch (error) {
         console.error('Error fetching dishes:', error);
       }
     };
 
-    fetchDishData(); // Call the fetchDishData function within useEffect
-  }, []); // Add an empty dependency array to run the effect only once
+      fetchDishData(); // Call the fetchDishData function within useEffect
+    }, []); // Add an empty dependency array to run the effect only once
+
 
   return menu; // Return the menu data
 };

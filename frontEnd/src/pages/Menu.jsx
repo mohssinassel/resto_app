@@ -15,8 +15,8 @@ import { Container } from "reactstrap";
 
 const Menu = () => {
   const menuData = MenuList();
-  const [selectedCategory, setSelectedCategory] = useState("Breakfast");
-  const categories = ["Breakfast", "sandwich", "Drinks", "salade", "tajine", "compliments"];
+  const [selectedCategory, setSelectedCategory] = useState("BreakFast");
+  const categories = ["BreakFast", "Sandwich", "Drinks", "Salade", "Tajine", "Supplements"];
   const icons = [
     "/images/icons/croissant.png",
     "/images/icons/sandwich.png",
@@ -27,7 +27,9 @@ const Menu = () => {
   ];
   const { addToCart } = useContext(ShopContext);
 
-  const itemsPerPage = 6;
+  const itemsPerPage = 8;
+
+  
 
   const filteredMenu = menuData.filter((menuItem) => {
     if (selectedCategory === "All") {
@@ -37,13 +39,14 @@ const Menu = () => {
     }
   });
 
-  const pageCount = Math.ceil(filteredMenu.length / itemsPerPage);
-
+  
   const [pageNumber, setPageNumber] = useState(0);
   const startIndex = pageNumber * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const displayMenu = filteredMenu.slice(startIndex, endIndex);
-
+  
+  const pageCount = Math.ceil(filteredMenu.length / itemsPerPage);
+  
   const changePage = ({ selected }) => {
     setPageNumber(selected);
   };
@@ -71,6 +74,7 @@ const Menu = () => {
       </div>
 
       <div className="menuData">
+        
         {displayMenu.map((menuItem, key) => (
           <div onClick={() => addToCart(menuItem._id)} key={key}>
             <MenuItem
@@ -86,6 +90,7 @@ const Menu = () => {
       <div className="pagination">
         <ReactPaginate
           pageCount={pageCount}
+          // pageRangeDisplayed={5}
           onPageChange={changePage}
           previousLabel={"Prev"}
           nextLabel={"Next"}

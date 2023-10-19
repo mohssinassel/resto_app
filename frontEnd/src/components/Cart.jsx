@@ -6,15 +6,17 @@ import { MenuList } from "../helpers/MenuList";
 import "../styles/cart.css";
 
 const Cart = () => {
-  const menuData = MenuList();
+  
 
   const { cartItems, getTotalCartAmount, checkout } = useContext(ShopContext);
   const totalAmount = getTotalCartAmount();
 
   const navigate = useNavigate();
 
-  // Filter menuData to only include items with a quantity greater than 0
-  const selectedMenuItems = menuData.filter((product) => cartItems[String(product._id)] > 0);
+  
+  const selectedMenuItems = MenuList().filter((product) => cartItems[product._id] > 0);
+
+  
 
   return (
     <div className="cart">
@@ -26,6 +28,7 @@ const Cart = () => {
           <CartItem key={product._id} data={product} />
         ))}
       </div>
+      
 
       {totalAmount > 0 ? (
         <div className="checkout">
@@ -42,7 +45,7 @@ const Cart = () => {
           </button>
         </div>
       ) : (
-        <h1> Your Shopping Cart is Empty</h1>
+        <h1 onClick={() => console.log(cartItems)}> Your Shopping Cart is Empty</h1>
       )}
     </div>
   );
