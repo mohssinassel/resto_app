@@ -10,7 +10,6 @@ module.exports.getAllDishes = async (req, res, next) => {
             return res.json(dishes);
         }
     } catch (err) {
-        console.log("Error in getAllDishes: ", err);
         next(err);
     }
 };

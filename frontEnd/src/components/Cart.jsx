@@ -1,17 +1,22 @@
-import React ,{useContext}from "react";
-// import { Container, Row, Col } from "reactstrap";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { ShopContext } from "./shop-context";
 import { CartItem } from "./cart-item";
 import { MenuList } from "../helpers/MenuList";
 import "../styles/cart.css";
 
-const Cart  = () =>{
-        
-    const { cartItems  , getTotalCartAmount, checkout} = useContext(ShopContext);
-    const totalAmount = getTotalCartAmount();
+const Cart = () => {
+  
 
-    const navigate = useNavigate();
+  const { cartItems, getTotalCartAmount, checkout } = useContext(ShopContext);
+  const totalAmount = getTotalCartAmount();
+
+  const navigate = useNavigate();
+
+  
+  const selectedMenuItems = MenuList().filter((product) => cartItems[product._id] > 0);
+
+  
 
   return (
     <div className="cart">
@@ -19,12 +24,11 @@ const Cart  = () =>{
         <h1>Your Cart Items</h1>
       </div>
       <div className="cart">
-        {MenuList.map((product) => {
-          if (cartItems[product.id] !== 0) {
-            return <CartItem data={product} />;
-          }
-        })}
+        {selectedMenuItems.map((product) => (
+          <CartItem key={product._id} data={product} />
+        ))}
       </div>
+      
 
       {totalAmount > 0 ? (
         <div className="checkout">
@@ -41,10 +45,10 @@ const Cart  = () =>{
           </button>
         </div>
       ) : (
-        <h1> Your Shopping Cart is Empty</h1>
+        <h1 onClick={() => console.log(cartItems)}> Your Shopping Cart is Empty</h1>
       )}
     </div>
   );
-    
-} 
+};
+
 export default Cart;

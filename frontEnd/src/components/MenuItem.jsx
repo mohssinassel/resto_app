@@ -1,6 +1,7 @@
 import React from "react";
 
 const MenuItem = ({  image,name, price }) =>{
+  
   return (
     <div className="menuItem">
       <div style={{ backgroundImage: `url(${image})` }}> </div>
