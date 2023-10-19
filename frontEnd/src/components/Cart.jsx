@@ -1,17 +1,20 @@
-import React ,{useContext}from "react";
-// import { Container, Row, Col } from "reactstrap";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { ShopContext } from "./shop-context";
 import { CartItem } from "./cart-item";
 import { MenuList } from "../helpers/MenuList";
 import "../styles/cart.css";
 
-const Cart  = () =>{
-        
-    const { cartItems  , getTotalCartAmount, checkout} = useContext(ShopContext);
-    const totalAmount = getTotalCartAmount();
+const Cart = () => {
+  const menuData = MenuList();
 
-    const navigate = useNavigate();
+  const { cartItems, getTotalCartAmount, checkout } = useContext(ShopContext);
+  const totalAmount = getTotalCartAmount();
+
+  const navigate = useNavigate();
+
+  // Filter menuData to only include items with a quantity greater than 0
+  const selectedMenuItems = menuData.filter((product) => cartItems[String(product._id)] > 0);
 
   return (
     <div className="cart">
@@ -19,11 +22,9 @@ const Cart  = () =>{
         <h1>Your Cart Items</h1>
       </div>
       <div className="cart">
-        {MenuList.map((product) => {
-          if (cartItems[product.id] !== 0) {
-            return <CartItem data={product} />;
-          }
-        })}
+        {selectedMenuItems.map((product) => (
+          <CartItem key={product._id} data={product} />
+        ))}
       </div>
 
       {totalAmount > 0 ? (
@@ -45,6 +46,6 @@ const Cart  = () =>{
       )}
     </div>
   );
-    
-} 
+};
+
 export default Cart;
