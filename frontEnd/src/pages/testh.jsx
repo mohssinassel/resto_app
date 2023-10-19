@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {dishOrder} from "../utils/ApiRoutes";
+import {dishGetAll} from "../utils/ApiRoutes";
 import axios from "axios";
 
 const testh = () => {
@@ -8,7 +8,7 @@ const testh = () => {
   useEffect(() => {
     const fetchDishes = async () => {
       try {
-        const response = await axios.get(dishOrder);
+        const response = await axios.get(dishGetAll);
           // if (!response.ok) {
           //   throw new Error('Network response was not ok');
           // }

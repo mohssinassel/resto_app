@@ -1,5 +1,5 @@
-import React, { useState, useContext } from "react";
-import { MenuList } from '/src/helpers/MenuList.js';
+import  { useState, useContext, useEffect } from "react";
+// import { MenuList } from '/src/helpers/MenuList.js';
 import MenuItem from "../components/MenuItem";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { ShopContext } from "../components/shop-context";
@@ -12,22 +12,46 @@ import "../styles/Menu.css";
 import "../styles/pagination.css";
 import { slidesX } from "../helpers/SlidesX";
 import { Container } from "reactstrap";
+import {dishGetAll} from "../utils/ApiRoutes";
+import axios from "axios";
 
 const Menu = () => {
-  const [selectedCategory, setSelectedCategory] = useState('Breakfast');
+  const [menu, setMenu] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState('Drinks');
   const categories = ['Breakfast', 'sandwich', 'Drinks', 'salade', 'tajine', 'compliments'];
   const icons = ['/images/icons/croissant.png', '/images/icons/sandwich.png', '/images/icons/drink.png', '/images/icons/salade.png', '/images/icons/tajine.png', '/images/icons/compliments.png'];
   const { addToCart } = useContext(ShopContext);
 
+  useEffect(() => {
+    const fetchDishData = async () => {
+      try {
+        const response = await axios.get(dishGetAll);
+  
+        if (response.data && response.data.msg) {
+          console.log(response.data.msg);
+        }
+  
+        console.log(response.data);
+        setMenu(response.data);
+      } catch (error) {
+        console.error('Error fetching dishes:', error);
+      }
+    };
+  
+    fetchDishData();
+  }, []); 
+  
+
   const itemsPerPage = 6;
 
-  const filteredMenu = MenuList.filter((menuItem) => {
+  const filteredMenu = menu.filter((menuItem) => {
     if (selectedCategory === 'All') {
       return true;
     } else {
       return menuItem.category === selectedCategory;
     }
   });
+  console.log(menu,"filter",filteredMenu);
 
 
   const pageCount = Math.ceil(filteredMenu.length / itemsPerPage);
@@ -63,11 +87,11 @@ const Menu = () => {
         </Swiper>
       </div>
       <div className="menuList">
-        {displayMenu.map((menuItem, key) => (
-          <div onClick={() => addToCart(menuItem.id)} key={key}>
+        {displayMenu.map((menuItem, _) => (
+          <div onClick={() => addToCart(menuItem._id)} key={menuItem._id}>
             <MenuItem
-              key={key}
-              image={menuItem.image}
+              key={menuItem._id}
+              image={menuItem.image_url}
               name={menuItem.name}
               price={menuItem.price}
             />
