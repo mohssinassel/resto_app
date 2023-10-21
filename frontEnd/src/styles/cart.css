@@ -35,6 +35,27 @@
   /* background-color: blue; */
 }
 
+.description{
+  display: flex;
+  justify-content: space-between;
+}
+.removeItemCart{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.removeItemCart > div{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--main-color);
+  border: none;
+  border-radius:10px ;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+}
+
 .countHandler input {
   width: 70px;
   text-align: center;
@@ -52,6 +73,12 @@
   border-radius: 8px;
   margin: 10px;
   cursor: pointer;
+}
+.checkout > p{
+  font-size: 2rem;
+  font-weight: bolder;
+  color: var(--main-color);
+  text-align: center;
 }
 
 .countHandler button{

@@ -19,19 +19,15 @@ const userSchema = new mongoose.Schema({
     required: true,
     min: 8,
   },
-  isAvatarImageSet: {
-    type: Boolean,
-    default: false,
-  },
   avatarImage: {
     type: String,
     default: "",
   },
-  role: {
+  phone: {
     type: String,
-    required: true,
-    enum: ["cashier", "chef","waiter","admin"],
-  }
+    default: "",
+  },
+  
 });
 
 module.exports = mongoose.model("Users", userSchema);

@@ -2,7 +2,7 @@ import { Avatar, Space, Table, Typography, Input, Button , Image } from "antd";
 import { SearchOutlined , ZoomInOutlined} from '@ant-design/icons';
 import { useEffect, useState, useRef } from "react";
 import Highlighter from 'react-highlight-words';
-import { MenuList } from '/src/helpers/MenuList.js';
+import { MenuList } from '../helpers/MenuList.js';
 import "../styles/Inventory.css";
 
 const Inventory = () => {
@@ -11,15 +11,25 @@ const Inventory = () => {
   const [searchText, setSearchText] = useState('');
   const [searchedColumn, setSearchedColumn] = useState('');
   const searchInput = useRef(null);
+  const menuData = MenuList();
 
   useEffect(() => {
     setLoading(true);
     // Assuming 'MenuList' contains your data
-    setDataSource(MenuList);
+    setDataSource(menuData.map((item) => ({
+      ...item,
+      key: item.id,
+    })));
+    // console.log(menuData);
+    // console.log(dataSource);
+    
     setLoading(false);
-  }, []);
+    
+  }, [menuData]);
 
   const handleSearch = (selectedKeys, confirm, dataIndex) => {
+    
+
     confirm();
     setSearchText(selectedKeys[0]);
     setSearchedColumn(dataIndex);
@@ -80,14 +90,14 @@ const Inventory = () => {
   });
 
   return (
-    <Space size={30} direction="vertical" style={{ display: 'flex' , alignItems: 'center' ,textAlign: 'center'}}>
-      <Typography.Title level={1} strong  >Inventory</Typography.Title>
+    <Space size={30} direction="vertical" style={{ display: 'flex' , alignItems: 'center' ,textAlign: 'center',marginTop:'15px'}}>
+      
       <Table
         loading={loading}
         columns={[
           {
             title: "Image",
-            dataIndex: "image",
+            dataIndex: "image_url",
             render: (link) => (
                 <Image
                   src={link}

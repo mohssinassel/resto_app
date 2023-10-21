@@ -5,11 +5,6 @@ const ordersSchema = new mongoose.Schema({
     type: Date,
     required: true,
   },
-  
-  table :{
-    type: String,
-    required: true,
-  },
   dishes :{
     type: Array,
     required: true,
@@ -18,7 +13,14 @@ const ordersSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-
+  dishStatus: [
+      {
+        type: String,
+        enum: ['', 'En cours de préparation', 'Prête'],
+      },
+    ],
+  
+  
 });
 
 module.exports = mongoose.model("Orders", ordersSchema);

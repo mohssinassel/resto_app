@@ -1,8 +1,10 @@
-import { Space, Table, Typography, Input, Button } from "antd";
+import { Space, Table, Typography, Input, Button ,Select} from "antd";
 import { SearchOutlined } from '@ant-design/icons';
 import { useEffect, useState, useRef } from "react";
 import Highlighter from 'react-highlight-words';
-import { MenuList } from '/src/helpers/MenuList.js';
+import { OrderList } from '/src/helpers/OrderList.js';
+
+const { Option } = Select;
 
 const Orders = () => {
   const [loading, setLoading] = useState(false);
@@ -10,19 +12,23 @@ const Orders = () => {
   const [searchText, setSearchText] = useState('');
   const [searchedColumn, setSearchedColumn] = useState('');
   const searchInput = useRef(null);
+  const orderData = OrderList();
 
+  
   useEffect(() => {
     setLoading(true);
-    setDataSource(MenuList);
+    setDataSource(orderData.map((item) => ({
+      ...item,
+      key: item.id,
+    })));
     setLoading(false);
-  }, []);
+  }, [orderData]);
 
   const handleSearch = (selectedKeys, confirm, dataIndex) => {
     confirm();
     setSearchText(selectedKeys[0]);
     setSearchedColumn(dataIndex);
   };
-
   const handleReset = (clearFilters) => {
     clearFilters();
     setSearchText('');
@@ -78,35 +84,45 @@ const Orders = () => {
   });
 
   return (
-    <Space size={20} direction="vertical" style={{ display: 'flex' , alignItems: 'center' ,textAlign: 'center'}}>
-      <Typography.Title level={1} >Orders</Typography.Title>
+    <Space size={20} direction="vertical" style={{ display: 'flex' , alignItems: 'center' ,textAlign: 'center',marginTop:'15px'}}>
       <Table
         loading={loading}
         columns={[
           {
-            title: "Title",
-            dataIndex: "title",
-            ...getColumnSearchProps("title", "Title"),
-            width: 600,
+            title: "Dishes",
+            dataIndex: "dishes",
+            ...getColumnSearchProps("dishes", "Dishes"),
+            width: 400,
+            render: (dishes) => dishes.map(dish => dish.name).join(' , '), // Display dish names
           },
           {
             title: "Price",
-            dataIndex: "price",
-            render: (value) => <span>${value}</span>,
-            ...getColumnSearchProps("price", "Price"),
-            width: 100,
-          },
-          {
-            title: "Quantity",
-            dataIndex: "quantity",
-            ...getColumnSearchProps("quantity", "Quantity"),
-            width: 100,
+            dataIndex: "dishes",
+            ...getColumnSearchProps("dishes", "Price"),
+            width: 300,
+            render: (dishes) => dishes.map(dish => dish.price).join(' + '), // Display dish names
           },
           {
             title: "Total",
-            dataIndex: "total",
-            ...getColumnSearchProps("total", "Total"),
+            dataIndex: "totalAmount",
+            ...getColumnSearchProps("totalAmount", "Total"),
             width: 100,
+          },
+           {
+            title: "Order Status",
+            dataIndex: "dishStatus",
+            width: 100,
+            render: (status, record) => (
+              <Select
+                style={{ width: 120 }}
+                value={status}
+                onChange={(value) => handleStatusChange(record.key, value)}
+              >
+                
+                <Option value="En cours de préparation">In Preparation</Option>
+                <Option value="Prête">Done</Option>
+              </Select>
+            ),
           },
         ]}
         dataSource={dataSource}

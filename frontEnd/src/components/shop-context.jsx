@@ -30,16 +30,18 @@ export const ShopContextProvider = (props) => {
   };
 
   const addToCart = (itemId) => {
-    
     setCartItems((prev) => {
-      console.log("Previous cart state:", prev);
       return { ...prev, [itemId]: (prev[itemId] || 0) + 1 };
     });
-    
   };
+  
 
   const removeFromCart = (itemId) => {
     setCartItems((prev) => ({ ...prev, [itemId]: (prev[itemId] || 0) - 1 }));
+  };
+
+  const removeAllFromCart = (itemId) => {
+    setCartItems((prev) => ({ ...prev, [itemId]: 0 }));
   };
 
   const updateCartItemCount = (newAmount, itemId) => {
@@ -60,6 +62,7 @@ export const ShopContextProvider = (props) => {
     removeFromCart,
     getTotalCartAmount,
     checkout,
+    removeAllFromCart,
   };
 
   return (

@@ -44,17 +44,12 @@ module.exports.register = async (req, res, next) => {
 
 module.exports.getAllUsers = async (req, res, next) => {
   try {
-    const users = await User.find({ _id: { $ne: req.params.id } }).select([
-      "email",
-      "username",
-      "avatarImage",
-      "_id",
-      "role"
-    ]);
-    return res.json(users);
-  } catch (ex) {
-    next(ex);
-  }
+    const user = await User.find({});
+    if(user === null) return res.json({msg: "No user found"});
+    return res.json(user);
+} catch (err) {
+    next(err);
+}
 };
 
 module.exports.setAvatar = async (req, res, next) => {
