@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { MenuList } from "../helpers/MenuList"; // Update the import path
 import MenuItem from "../components/MenuItem";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { ShopContext } from "../components/shop-context";
+
 import ReactPaginate from "react-paginate";
 import "swiper/css"; // Update the import path
 import "swiper/css/free-mode";
@@ -25,7 +25,7 @@ const Menu = () => {
     "/images/icons/tajine.png",
     "/images/icons/compliments.png",
   ];
-  const { addToCart } = useContext(ShopContext);
+  
 
   const itemsPerPage = 8;
 
@@ -76,9 +76,10 @@ const Menu = () => {
       <div className="menuData">
         
         {displayMenu.map((menuItem, key) => (
-          <div onClick={() => addToCart(menuItem._id)} key={key}>
+          <div  key={key}>
             <MenuItem
               key={menuItem._id}
+              id={menuItem._id}
               image={menuItem.image_url}
               name={menuItem.name}
               price={menuItem.price}

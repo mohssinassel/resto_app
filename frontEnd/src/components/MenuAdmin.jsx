@@ -3,8 +3,9 @@ import {
     ShopOutlined,
     ShoppingCartOutlined,
     UserOutlined,
+    LogoutOutlined,
   } from "@ant-design/icons";
-import { Menu } from "antd";
+import { Menu, Button  } from "antd";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "../styles/admin.css"
@@ -18,6 +19,11 @@ const MenuAdmin = () => {
         const pathName = location.pathname;
         setSelectedKeys(pathName);
     }, [location.pathname]);
+    const handleLogout = () => {
+      // Handle the logout action here
+      // You can add the logic to clear the user's session and redirect to the login page
+      navigate("/login"); // Redirect to the login page, for example
+    };
 
     const navigate = useNavigate()
     return(
@@ -52,6 +58,14 @@ const MenuAdmin = () => {
           },
         ]}
       ></Menu>
+      <Button
+        type="primary"
+        style={{marginTop: '5px'}}
+        icon={<LogoutOutlined />}
+        onClick={handleLogout}
+      >
+        Log Out
+      </Button>
     </div>
     )
 }

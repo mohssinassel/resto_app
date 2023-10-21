@@ -1,8 +1,8 @@
-import { Avatar, Space, Table, Typography, Input, Button , Image} from "antd";
+import { Avatar, Space, Table, Typography, Input, Button , Image,Popconfirm} from "antd";
 import { SearchOutlined , ZoomInOutlined} from '@ant-design/icons';
 import { useEffect, useState, useRef } from "react";
 import Highlighter from 'react-highlight-words';
-import { MenuList } from '/src/helpers/MenuList.js';
+import { CustomerList } from '/src/helpers/CustomerList.js';
 
 const Customers = () => {
   const [loading, setLoading] = useState(false);
@@ -10,12 +10,16 @@ const Customers = () => {
   const [searchText, setSearchText] = useState('');
   const [searchedColumn, setSearchedColumn] = useState('');
   const searchInput = useRef(null);
+  const customerData = CustomerList();
 
   useEffect(() => {
     setLoading(true);
-    setDataSource(MenuList);
+    setDataSource(customerData.map((item) => ({
+      ...item,
+      key: item.id,
+    })));
     setLoading(false);
-  }, []);
+  }, [customerData]);
 
   const handleSearch = (selectedKeys, confirm, dataIndex) => {
     confirm();
@@ -78,33 +82,15 @@ const Customers = () => {
   });
 
   return (
-    <Space size={20} direction="vertical" style={{ display: 'flex' , alignItems: 'center' ,textAlign: 'center'}}>
-      <Typography.Title level={1}>Customers</Typography.Title>
+    <Space size={20} direction="vertical" style={{ display: 'flex' , alignItems: 'center' ,textAlign: 'center',marginTop:'15px'}}>
+     
       <Table
         loading={loading}
         columns={[
           {
-            title: "Photo",
-            dataIndex: "image",
-            render: (link) => <Image
-            src={link}
-            width={50}
-            height={50}
-            preview={{ mask: <ZoomInOutlined /> }}
-            />,
-            width:100,
-
-          },
-          {
-            title: "First Name",
-            dataIndex: "firstName",
-            ...getColumnSearchProps("firstName", "First Name"),
-            width:200,
-          },
-          {
-            title: "LastName",
-            dataIndex: "lastName",
-            ...getColumnSearchProps("lastName", "Last Name"),
+            title: "Username",
+            dataIndex: "username",
+            ...getColumnSearchProps("username", "Username"),
             width:200,
           },
 
@@ -119,6 +105,23 @@ const Customers = () => {
             dataIndex: "phone",
             ...getColumnSearchProps("phone", "Phone"),
             width:300,
+          },
+          {
+            title: "Actions",
+            dataIndex: "actions",
+            width: 100,
+            render: (text, record) => (
+              <Popconfirm
+                title="Are you sure to delete this customer?"
+               
+                okText="Yes"
+                cancelText="No"
+              >
+                <Button type="danger" size="small" style={{backgroundColor: "red" , color:"white"}}>
+                  Delete
+                </Button>
+              </Popconfirm>
+            ),
           },
         ]}
         dataSource={dataSource}

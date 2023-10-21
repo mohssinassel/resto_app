@@ -1,12 +1,14 @@
-import React from "react";
-
-const MenuItem = ({  image,name, price }) =>{
+import React ,{useContext}from "react";
+import { ShopContext } from "./shop-context";
+const MenuItem = ({ id, image,name, price }) =>{
+  const { addToCart } = useContext(ShopContext);
   
   return (
     <div className="menuItem">
       <div style={{ backgroundImage: `url(${image})` }}> </div>
-      <h1> {name} </h1>
-      <p> ${price} </p>
+      <h3> {name} </h3>
+      <p> {price} DH</p>
+      <button onClick={() => addToCart(id)}> Add to Cart </button>
     </div>
   );
 }
