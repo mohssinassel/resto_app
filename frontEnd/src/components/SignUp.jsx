@@ -2,16 +2,17 @@ import '../styles/Sign.css'
 const SignUp = ({ toggleComponent }) => {
     return (
         <div className="SignInContainer">
-            <h2>Sign Up</h2>
-            <h3>You can create New Account Here</h3>
+            <h2>Inscrivez-vous</h2>
+            <h3>Vous pouvez créer un nouveau compte ici</h3>
             <div className='formContainerSignUp'>
                 <form action="" className='formSignIn'>
-                    <input type='text' placeholder='First Name'/>
-                    <input type='text' placeholder='Last Name'/>
-                    <input type="text" placeholder='Username'/>
+                    
+                    <input type='text' placeholder="Nom d'utilisateur"/>
+                    <input type="email" placeholder='Email'/>
                     <input type="password" placeholder='password'/>
-                    <button className='submitSignIn'>Submit</button>
-                    <div style={{ textAlign: 'center' ,marginTop:'10px' , cursor:'pointer'}} onClick={toggleComponent}>Have an account?</div>
+                    <input type="text" placeholder='Telephone'/>
+                    <button className='submitSignIn'>Envoyer</button>
+                    <div style={{ textAlign: 'center' ,marginTop:'10px' , cursor:'pointer'}} onClick={toggleComponent}>Avez-vous un compte ?</div>
                 </form>
             </div>
         </div>

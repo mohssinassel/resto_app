@@ -21,7 +21,7 @@ const Cart = () => {
   return (
     <div className="cart">
       <div>
-        <h1>Your Cart Items</h1>
+        <h1>Votre Panier</h1>
       </div>
       <div className="cart">
         {selectedMenuItems.map((product) => (
@@ -32,8 +32,8 @@ const Cart = () => {
 
       {totalAmount > 0 ? (
         <div className="checkout">
-          <p> Subtotal: {totalAmount} DH</p>
-          <button onClick={() => navigate("/Menu")}> Continue Shopping </button>
+          <p> Total: {totalAmount} DH</p>
+          <button onClick={() => navigate("/Menu")}> Continuer les achats</button>
           <button
             onClick={() => {
               checkout();
@@ -41,11 +41,11 @@ const Cart = () => {
             }}
           >
             {" "}
-            Checkout{" "}
+            Valider la commande{" "}
           </button>
         </div>
       ) : (
-        <h1 onClick={() => console.log(cartItems)}> Your Shopping Cart is Empty</h1>
+        <h1 onClick={() => console.log(cartItems)}> Votre Panier est Vide</h1>
       )}
     </div>
   );

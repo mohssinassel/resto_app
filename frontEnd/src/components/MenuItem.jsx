@@ -8,7 +8,7 @@ const MenuItem = ({ id, image,name, price }) =>{
       <div style={{ backgroundImage: `url(${image})` }}> </div>
       <h3> {name} </h3>
       <p> {price} DH</p>
-      <button onClick={() => addToCart(id)}> Add to Cart </button>
+      <button onClick={() => addToCart(id)}> Ajouter au Panier </button>
     </div>
   );
 }

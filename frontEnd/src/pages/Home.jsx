@@ -23,14 +23,12 @@ const Home = () => {
             </div>
         </div>
         <div className="search">
-            <div className="searchSentence">Experience the joy of food </div>
-            <div className="searchSentence">that&apos;s crafted with <span style={{color:'var(--second-color)'}}>PASSION</span></div>
-            <div className="searchSentence">and served with <span style={{color:'var(--main-color)'}}>LOVE</span>. </div>
-            <div className="searchSentence2">Discover Your Perfect Meal: Unleash Your Appetite and Find Your Culinary Desire!</div>
+            <div className="searchSentence">Vivez la joie de la nourriture </div>
+            <div className="searchSentence">préparée avec <span style={{color:'var(--second-color)'}}>PASSION</span></div>
+            <div className="searchSentence">et servie avec <span style={{color:'var(--main-color)'}}>AMOUR</span>. </div>
+            <div className="searchSentence2">Découvrez Votre Repas Parfait : Laissez S'exprimer Votre Appétit et Trouvez Votre Désir Culinaire !</div>
             <div className="containerSearch">
-                        
-                        <button type="submit" className="orderbtn">Order Now </button>
-                        <button type="submit" className="seeFoodbtn">See Foods</button>
+                        <button type="submit" className="seeFoodbtn">Commandez maintenant</button>
                     
             </div>
         </div>
