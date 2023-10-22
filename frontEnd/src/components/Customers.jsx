@@ -16,7 +16,7 @@ const Customers = () => {
     setLoading(true);
     setDataSource(customerData.map((item) => ({
       ...item,
-      key: item.id,
+      key: item._id,
     })));
     setLoading(false);
   }, [customerData]);
@@ -88,9 +88,9 @@ const Customers = () => {
         loading={loading}
         columns={[
           {
-            title: "Username",
+            title: "Nom d'utilisateur",
             dataIndex: "username",
-            ...getColumnSearchProps("username", "Username"),
+            ...getColumnSearchProps("username", "Nom d'utilisateur"),
             width:200,
           },
 
@@ -101,9 +101,9 @@ const Customers = () => {
             width:400,
           },
           {
-            title: "Phone",
+            title: "Telephone",
             dataIndex: "phone",
-            ...getColumnSearchProps("phone", "Phone"),
+            ...getColumnSearchProps("phone", "Telephone"),
             width:300,
           },
           {
@@ -118,7 +118,7 @@ const Customers = () => {
                 cancelText="No"
               >
                 <Button type="danger" size="small" style={{backgroundColor: "red" , color:"white"}}>
-                  Delete
+                  Supprimer
                 </Button>
               </Popconfirm>
             ),

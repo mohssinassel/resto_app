@@ -55,7 +55,7 @@ const Menu = () => {
     <div className="menu" id="menu">
       <section className="common__section">
         <Container>
-          <h1 className="menuTitle">Our Menu</h1>
+          <h1 className="menuTitle">Notre Menu</h1>
         </Container>
       </section>
       <div className="container justify-content-center"> {/* Fixed the class name */}
@@ -93,8 +93,8 @@ const Menu = () => {
           pageCount={pageCount}
           // pageRangeDisplayed={5}
           onPageChange={changePage}
-          previousLabel={"Prev"}
-          nextLabel={"Next"}
+          previousLabel={"Précédent"}
+          nextLabel={"Suivant"}
           containerClassName="paginationBttns"
         />
       </div>

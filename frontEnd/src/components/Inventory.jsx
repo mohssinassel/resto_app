@@ -18,7 +18,7 @@ const Inventory = () => {
     // Assuming 'MenuList' contains your data
     setDataSource(menuData.map((item) => ({
       ...item,
-      key: item.id,
+      key: item._id,
     })));
     // console.log(menuData);
     // console.log(dataSource);
@@ -110,16 +110,16 @@ const Inventory = () => {
             
           },
           {
-            title: "Name",
+            title: "Nom",
             dataIndex: "name",
-            ...getColumnSearchProps("name", "Name"),
+            ...getColumnSearchProps("name", "Nom"),
             width: 600,
           },
           {
-            title: "Price",
+            title: "Prix",
             dataIndex: "price",
-            render: (value) => <span>${value}</span>,
-            ...getColumnSearchProps("price", "Price"),
+            render: (value) => <span>{value}DH</span>,
+            ...getColumnSearchProps("price", "Prix"),
             width: 100,
           },
           {
@@ -129,9 +129,9 @@ const Inventory = () => {
             width: 100,
           },
           {
-            title: "Category",
+            title: "Catégorie",
             dataIndex: "category",
-            ...getColumnSearchProps("category", "Category"),
+            ...getColumnSearchProps("category", "Catégorie"),
             width: 100,
           },
           

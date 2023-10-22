@@ -19,10 +19,27 @@ const Orders = () => {
     setLoading(true);
     setDataSource(orderData.map((item) => ({
       ...item,
-      key: item.id,
+      key: item._id,
     })));
     setLoading(false);
   }, [orderData]);
+
+  const handleStatusChange = (key, newStatus) => {
+    // Find the index of the row with the given key in the dataSource
+    const rowIndex = dataSource.findIndex((item) => item.key === key);
+
+    if (rowIndex !== -1) {
+      // Create a copy of the dataSource and update the status for the selected row
+      const updatedDataSource = [...dataSource];
+      updatedDataSource[rowIndex] = { ...updatedDataSource[rowIndex], dishStatus: newStatus };
+
+      // Update the state with the new list of data
+      setDataSource(updatedDataSource);
+
+      // You might also want to send the updated status to your server/API
+      // to persist the change in the database for the selected order
+    }
+  };
 
   const handleSearch = (selectedKeys, confirm, dataIndex) => {
     confirm();
@@ -89,16 +106,16 @@ const Orders = () => {
         loading={loading}
         columns={[
           {
-            title: "Dishes",
+            title: "Plats",
             dataIndex: "dishes",
-            ...getColumnSearchProps("dishes", "Dishes"),
+            ...getColumnSearchProps("dishes", "Plats"),
             width: 400,
             render: (dishes) => dishes.map(dish => dish.name).join(' , '), // Display dish names
           },
           {
-            title: "Price",
+            title: "Prix",
             dataIndex: "dishes",
-            ...getColumnSearchProps("dishes", "Price"),
+            ...getColumnSearchProps("dishes", "Prix"),
             width: 300,
             render: (dishes) => dishes.map(dish => dish.price).join(' + '), // Display dish names
           },
@@ -109,9 +126,9 @@ const Orders = () => {
             width: 100,
           },
            {
-            title: "Order Status",
+            title: "État de la commande",
             dataIndex: "dishStatus",
-            width: 100,
+            width: 120,
             render: (status, record) => (
               <Select
                 style={{ width: 120 }}
@@ -119,8 +136,8 @@ const Orders = () => {
                 onChange={(value) => handleStatusChange(record.key, value)}
               >
                 
-                <Option value="En cours de préparation">In Preparation</Option>
-                <Option value="Prête">Done</Option>
+                <Option value="En préparation">En préparation</Option>
+                <Option value="Prête">prête</Option>
               </Select>
             ),
           },

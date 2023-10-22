@@ -42,17 +42,17 @@ const MenuAdmin = () => {
         items={[
           
           {
-            label: "Inventory",
+            label: "Inventaire",
             key: "/admin/inventory",
             icon: <ShopOutlined />,
           },
           {
-            label: "Orders",
+            label: "Commandes",
             key: "/admin",
             icon: <ShoppingCartOutlined />,
           },
           {
-            label: "Customers",
+            label: "Clients",
             key: "/admin/customers",
             icon: <UserOutlined />,
           },
@@ -64,7 +64,7 @@ const MenuAdmin = () => {
         icon={<LogoutOutlined />}
         onClick={handleLogout}
       >
-        Log Out
+        Se déconnecter
       </Button>
     </div>
     )

@@ -7,7 +7,7 @@ const AboutUs = () => {
         <>
         <section className="common__section">
             <Container>
-            <h1 className="menuTitle">About Us</h1>
+            <h1 className="menuTitle">Qui Sommes Nous?</h1>
             </Container>
         </section>
         <div className="aboutContainer">
