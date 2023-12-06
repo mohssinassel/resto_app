@@ -21,7 +21,7 @@ const Menu = () => {
     "/images/icons/croissant.png",
     "/images/icons/sandwich.png",
     "/images/icons/drink.png",
-    "/images/icons/salade.png",
+    "/images/icons/salade.png", 
     "/images/icons/tajine.png",
     "/images/icons/compliments.png",
   ];
