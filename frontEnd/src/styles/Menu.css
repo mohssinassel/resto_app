@@ -108,6 +108,7 @@
   background-color: var(--main-color);
   border: none;
 }
+
 .btn-categ.active{
   background-color: var(--second-color);
 }
@@ -120,7 +121,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-}
+ }
 
 @media only screen and (max-width: 1300px) {
   .menuList {
